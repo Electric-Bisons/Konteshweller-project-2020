@@ -6,3 +6,6 @@
 - comment almost every line of code for good understanding
 - external variables should be declared inside header files
 - make intialization for any variable
+- use efficient names for files
+- write small and efficient code so no useless code lines are used
+- ues defines when they are necessary
