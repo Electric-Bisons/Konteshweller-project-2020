@@ -1,1 +1,8 @@
+//  Coding Rules for AVR
 
+- use only effiecint data types for space like uint8_t for 8 bit, uint16_t for 16 bit, etc.
+- use bitfields for efficient data size in struct types
+- use descriptive names for data variables and functions: u8Data, tempu8Data for uint8_t or u16Data, etc.
+- comment almost every line of code for good understanding
+- external variables should be declared inside header files
+- make intialization for any variable
