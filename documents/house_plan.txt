@@ -1,6 +1,6 @@
 /*  Kitchen  */
 
-- CO2, methanol sensor
+- CO2, methane sensor
 - ventilation
 - exhaust
 - lights
