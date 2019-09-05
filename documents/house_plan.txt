@@ -1,0 +1,29 @@
+/*  Kitchen  */
+
+- CO2, methanol sensor
+- ventilation
+- exhaust
+- lights
+- temperature sensor
+
+
+/*  Bathroom  */
+
+- lights
+- ventilation
+
+
+/*  Living  */
+
+- lights
+- LCD + audio system
+- temperature sensor
+- camera
+- RFID sensor
+- lock system
+
+
+/*  Garden  */
+
+- humidity and temperature sensor
+- pressure sensor
