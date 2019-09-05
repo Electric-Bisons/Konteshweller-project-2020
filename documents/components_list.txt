@@ -22,3 +22,4 @@
 
 - Raspberry PI
 - ATmega2560 uC
+- at least one ESP8266 wifi module
