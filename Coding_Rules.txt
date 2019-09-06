@@ -10,3 +10,4 @@
 - write small and efficient code so no useless code lines are used
 - ues defines when they are necessary
 - place drivers inside specific folder and all of them inside src folder to keep the code clean
+- try to avoid floats or double data types
