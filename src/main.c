@@ -2,7 +2,7 @@
  * main.c
  *
  * Created: 06-Sep-19 02:10:49 PM
- * Author : Stipl3x
+ * Author : Electric-Bisons
  */ 
 
 #include <avr/io.h>
@@ -15,6 +15,5 @@ int main(void)
     while (1) 
     {
        
-    }
-}
-
+    } // end of while 1
+} // end of main
