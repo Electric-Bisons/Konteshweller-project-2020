@@ -9,3 +9,4 @@
 - use efficient names for files
 - write small and efficient code so no useless code lines are used
 - ues defines when they are necessary
+- place drivers inside specific folder and all of them inside src folder to keep the code clean
