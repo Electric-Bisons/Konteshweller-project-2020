@@ -15,5 +15,5 @@ int main(void)
     while (1) 
     {
        
-    } // end of while 1
+    } // end of main loop
 } // end of main
