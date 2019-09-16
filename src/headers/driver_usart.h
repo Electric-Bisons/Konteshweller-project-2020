@@ -1,9 +1,6 @@
 /*
- * driver_usart.h
- *
- * Created: 16-Sep-19 11:19:58 AM
- *  Author: black
- */ 
+* driver_usart.h - @Electric-Bisons
+*/
 
 #ifndef DRIVER_USART_H_
 #define DRIVER_USART_H_
