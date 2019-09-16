@@ -1,9 +1,6 @@
-/*
- * main.c
- *
- * Created: 16-Sep-19 11:15:08 AM
- * Author : Stipl3x
- */ 
+/* 
+* main.c - @Electric-Bisons
+*/
 
 #define F_CPU 16000000UL
 
