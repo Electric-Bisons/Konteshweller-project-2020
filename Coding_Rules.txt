@@ -13,5 +13,5 @@
 - place drivers inside specific folder and all of them inside src/headers folder to keep the code clean
 - try to avoid floats or double data types
 - create clean code for reading and for debugging to avoid confussion: indents, 
-  spaces like "if ( u8Data > foo )" and in functions like "uint8_t fooFunction(uin8_t param1, uint16_t param2)", etc.
+  spaces like "if( u8Data > foo )" and in functions like "uint8_t fooFunction( uin8_t param1, uint16_t param2 )", etc.
 - use functions when you can, but don't do overengineering code
