@@ -12,7 +12,7 @@ void USART0_init(void)
     UBRR0H = (uint8_t) (MY_BRR >> 8);
     UBRR0L = (uint8_t) MY_BRR;
     // enable TX0
-    UCSR0B = (1 << TXEN0);
+    UCSR0B = (1 << TXEN0) | (1 << RXEN0);
     // set 8-bit data buffer
     UCSR0C = (1 << UCSZ01) | (1 << UCSZ00);
 }
@@ -22,4 +22,12 @@ void USART0_TX_data(uint8_t u8Data)
     // wait for data buffer to empty
     while( !( UCSR0A & (1 << UDRE0) ) );
     UDR0 = u8Data;
+}
+
+uint8_t USART0_RX_data(void)
+{
+    // wait for data to be received
+    while( !( UCSR0A & (1 << RXC0) ) );
+    // store and return data received
+    return UDR0;
 }
