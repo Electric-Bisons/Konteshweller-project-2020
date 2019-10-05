@@ -11,8 +11,12 @@
 #ifndef DRIVER_HCSR04_H_
 #define DRIVER_HCSR04_H_
 
-void HCSR04_init(void);
-void HCSR04_trigger(void);
+#ifndef F_CPU
+#define F_CPU 16000000UL
+#endif
+
+void    HCSR04_init(void);
+void    HCSR04_trigger(void);
 uint8_t HCSR04_echo_cm(void);
 
 #endif /* DRIVER_HCSR04_H_ */
