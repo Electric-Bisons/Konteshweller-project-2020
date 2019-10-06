@@ -21,6 +21,7 @@ void USART0_TX_data(uint8_t u8Data)
 {
     // Wait for data buffer to empty
     while(!(UCSR0A & (1 << UDRE0)));
+    // Send data
     UDR0 = u8Data;
 }
 
@@ -28,6 +29,6 @@ uint8_t USART0_RX_data(void)
 {
     // Wait for data to be received
     while(!(UCSR0A & (1 << RXC0)));
-    // Store and return data received
+    // Return data
     return UDR0;
 }
