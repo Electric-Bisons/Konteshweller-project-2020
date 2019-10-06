@@ -12,36 +12,42 @@
 #include "headers/driver_timers.h"
 #include "headers/driver_hcsr04.h"
 
-volatile uint8_t vu8Flag = 0;
+extern volatile uint8_t vu8HCSR04Flag;
 
 int main(void)
 {
-    // enable global interrupt
+    // Enable global interrupt
     sei();
     
-    // init drivers
+    // Initialize drivers
     USART0_init();
     HCSR04_init();
     
-    HCSR04_trigger();
-    
     while(1)
     {
-        // execute only after measure is complete
-        if( vu8Flag )
+        if(vu8HCSR04Flag == 0)
         {
-            vu8Flag = 0;
             HCSR04_trigger();
         }
-    } // end of main loop
+    } // End of main loop
     
     return 0;
-} // end of main
+} // End of main
 
 ISR(INT4_vect)
 {
-    // send cm value over USART0
-    USART0_TX_data(HCSR04_echo_cm());
-    _delay_ms(1000);
-    vu8Flag = 1;
+    if(vu8HCSR04Flag == 2)
+    {
+        USART0_TX_data(returnHCSR04Value());
+    }
+    
+    if(vu8HCSR04Flag == 1)
+    {
+        startHCSR04Counting();
+    }
+}
+
+ISR(TIMER0_OVF_vect)
+{
+    overflowHCSR04();
 }
