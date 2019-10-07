@@ -29,6 +29,8 @@ int main(void)
         {
             HCSR04_trigger();
         }
+        
+        USART0_TX_string("data");
     } // End of main loop
     
     return 0;
@@ -39,6 +41,8 @@ ISR(INT4_vect)
     if(vu8HCSR04Flag == 2)
     {
         USART0_TX_data(returnHCSR04Value());
+        // Wait 1s for the next measure
+        _delay_ms(1000);
     }
     
     if(vu8HCSR04Flag == 1)
