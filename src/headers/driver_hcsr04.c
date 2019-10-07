@@ -74,6 +74,6 @@ void overflowHCSR04(void)
     TCCR0B = 0;
     // Set flag to 0
     vu8HCSR04Flag = 0;
-    // Wait 5 ms to be sure
+    // Wait to be sure
     _delay_ms(1000);
 }

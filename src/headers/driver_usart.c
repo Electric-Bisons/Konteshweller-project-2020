@@ -9,8 +9,8 @@
 void USART0_init(void)
 {
     // Set BAUD rate
-    UBRR0H = (uint8_t) (MY_BRR >> 8);
-    UBRR0L = (uint8_t) MY_BRR;
+    UBRR0H = (uint8_t)(MY_BRR >> 8);
+    UBRR0L = (uint8_t)MY_BRR;
     // Enable TX0
     UCSR0B = (1 << TXEN0) | (1 << RXEN0);
     // Set 8-bit data buffer
