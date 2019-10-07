@@ -47,8 +47,8 @@ void startHCSR04Counting(void)
     vu8HCSR04Flag = 2;
 }
 
-// This should be written before the set 
-// of flag to 2 to avoid conflict
+// This should be written before startHCSR04Counting()
+// avoid conflict in interrupt
 uint8_t returnHCSR04Value(void)
 {
     // Stop TIMER0
@@ -61,7 +61,6 @@ uint8_t returnHCSR04Value(void)
     tempU16Value = TCNT0 * 4 / 58;
     
     // Change back to trigger state
-    _delay_ms(1000);
     vu8HCSR04Flag = 0;
     
     return (uint8_t)tempU16Value;
@@ -72,8 +71,10 @@ void overflowHCSR04(void)
 {
     // Stop Timer0
     TCCR0B = 0;
+    
     // Set flag to 0
     vu8HCSR04Flag = 0;
-    // Wait to be sure
-    _delay_ms(1000);
+    
+    // Wait a little to be sure
+    _delay_ms(5);
 }

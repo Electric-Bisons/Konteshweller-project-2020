@@ -32,3 +32,20 @@ uint8_t USART0_RX_data(void)
     // Return data
     return UDR0;
 }
+
+void USART0_TX_string(const char *dataString)
+{
+    // Char index in string
+    uint8_t index = 0;
+    
+    // Read through string
+    while(dataString[index] != '\n')
+    {
+        // Wait for data buffer to empty
+        while(!(UCSR0A & (1 << UDRE0)));
+        // Send data
+        UDR0 = dataString[index];
+        
+        ++index;
+    }
+}
