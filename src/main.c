@@ -1,57 +1,60 @@
-/* 
-* main.c - @Electric-Bisons
+/*
+* main.c - @Stipl3x
 */
 
+#ifndef F_CPU
 #define F_CPU 16000000UL
+#endif
 
 #include <avr/io.h>
-#include <util/delay.h>
 #include <avr/interrupt.h>
+#include <util/delay.h>
 
-#include "headers/driver_usart.h"
-#include "headers/driver_timers.h"
-#include "headers/driver_hcsr04.h"
+// Custom drivers
+#include "headers/uno_usart.h"
+#include "headers/uno_adc.h"
+#include "headers/driver_thermistor.h"
 
-extern volatile uint8_t vu8HCSR04Flag;
+volatile uint8_t vu8ADCflag = 0;
+volatile uint16_t vu16ThermoData = 250;
+
+uint8_t gu8ThermoDataH;
+uint8_t gu8ThermoDataL;
 
 int main(void)
 {
-    // Enable global interrupt
+    // Enable global interrupts
     sei();
     
-    // Initialize drivers
-    USART0_init();
-    HCSR04_init();
+    // Initialize the drivers
+    USART_init();
+    ADC_init();
     
-    while(1)
+    // Main loop of program
+    while (1) 
     {
-        if(vu8HCSR04Flag == 0)
-        {
-            HCSR04_trigger();
-        }
+        vu8ADCflag = 1;
         
-        USART0_TX_string("data");
+        gu8ThermoDataH = (uint8_t)(vu16ThermoData >> 8);
+        gu8ThermoDataL = (uint8_t)vu16ThermoData;
+        
+        USART_TX(gu8ThermoDataH);
+        USART_TX(gu8ThermoDataL);
+        
+        _delay_ms(2000);
     } // End of main loop
     
     return 0;
 } // End of main
 
-ISR(INT4_vect)
-{
-    if(vu8HCSR04Flag == 2)
-    {
-        USART0_TX_data(returnHCSR04Value());
-        // Wait 1s for the next measure
-        _delay_ms(1000);
-    }
-    
-    if(vu8HCSR04Flag == 1)
-    {
-        startHCSR04Counting();
-    }
-}
 
-ISR(TIMER0_OVF_vect)
+ISR(ADC_vect)
 {
-    overflowHCSR04();
+    if(vu8ADCflag && (ADMUX == ADCTHERM))
+    {
+        vu8ADCflag = 0;
+        vu16ThermoData = thermConv(ADC);
+        ADMUX = ADCTHERM;
+    }
+    ADCSRA |= (1 << ADSC);
 }
