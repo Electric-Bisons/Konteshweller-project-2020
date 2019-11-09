@@ -18,9 +18,6 @@
 volatile uint8_t vu8ADCflag = 0;
 volatile uint16_t vu16ThermoData = 250;
 
-uint8_t gu8ThermoDataH;
-uint8_t gu8ThermoDataL;
-
 int main(void)
 {
     // Enable global interrupts
@@ -30,16 +27,19 @@ int main(void)
     USART_init();
     ADC_init();
     
+    uint8_t u8ThermoDataH;
+    uint8_t u8ThermoDataL;
+    
     // Main loop of program
     while (1) 
     {
         vu8ADCflag = 1;
         
-        gu8ThermoDataH = (uint8_t)(vu16ThermoData >> 8);
-        gu8ThermoDataL = (uint8_t)vu16ThermoData;
+        u8ThermoDataH = (uint8_t)(vu16ThermoData >> 8);
+        u8ThermoDataL = (uint8_t)vu16ThermoData;
         
-        USART_TX(gu8ThermoDataH);
-        USART_TX(gu8ThermoDataL);
+        USART_TX(u8ThermoDataH);
+        USART_TX(u8ThermoDataL);
         
         _delay_ms(2000);
     } // End of main loop
@@ -50,7 +50,7 @@ int main(void)
 
 ISR(ADC_vect)
 {
-    if(vu8ADCflag && (ADMUX == ADCTHERM))
+    if (vu8ADCflag && (ADMUX == ADCTHERM))
     {
         vu8ADCflag = 0;
         vu16ThermoData = thermConv(ADC);
